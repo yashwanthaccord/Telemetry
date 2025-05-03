@@ -24,13 +24,15 @@ async function main() {
   });
 
   // Editor events  
-  replit.editor.onDidChangeCursorPosition(() => {
+  const editor = await replit.editor;
+  
+  editor.onDidChangeCursorPosition(() => {
     logEvent('cursor_move', {
       timestamp: new Date().toISOString()
     });
   });
 
-  replit.editor.onDidChangeTextDocument((event) => {
+  editor.onDidChangeTextDocument(() => {
     logEvent('text_change', {
       timestamp: new Date().toISOString()
     });
