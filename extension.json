@@ -13,29 +13,11 @@
   },
   "icon": "/replit.svg",
   "scopes": [
-    {
-      "name": "read",
-      "reason": "Read any file in your App"
-    },
-    {
-      "name": "experimental-api",
-      "reason": "Access experimental APIs for telemetry"
-    },
-    {
-      "name": "filesystem:write",
-      "reason": "Track file system changes"
-    },
-    {
-      "name": "editor:read",
-      "reason": "Track editor interactions"
-    },
-    {
-      "name": "repldb:write",
-      "reason": "Write or delete any key in the repldb belonging to your App"
-    },
-    {
-      "name": "repldb:read",
-      "reason": "Read any key, or list all keys under any prefix in the repldb belonging to your App"
-    }
+    "read",
+    "experimental-api",
+    "filesystem:write", 
+    "editor:read",
+    "repldb:write",
+    "repldb:read"
   ]
 }
