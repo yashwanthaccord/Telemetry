@@ -1,13 +1,7 @@
 {
   "name": "Velto Telemetry",
   "description": "Telemetry collector for tracking user interactions and usage metrics",
-  "tools": [
-    {
-      "name": "Example Extension",
-      "icon": "/replit.svg",
-      "handler": "/"
-    }
-  ],
+  "tools": [],
   "background": {
     "page": "background.html"
   },
@@ -20,30 +14,20 @@
     },
 
     {
-    "name": "repldb:read",
-    "reason": "Read any key, or list all keys under any prefix in the repldb belonging to your App"
-  },
+      "name": "repldb:read",
+      "reason": "Read any key, or list all keys under any prefix in the repldb belonging to your App"
+    },
 
     {
-    "name": "repldb:write",
-    "reason": "Write or delete any key in the repldb belonging to your App"
-  },
+      "name": "repldb:write",
+      "reason": "Write or delete any key in the repldb belonging to your App"
+    },
 
     {
-    "name": "experimental-api",
-    "reason": "Use experimental APIs that may be unstable, change in behavior, or be removed entirely"
-  }
+      "name": "experimental-api",
+      "reason": "Use experimental APIs that may be unstable, change in behavior, or be removed entirely"
+    }
 
   ],
   "longDescription": "Telemetry",
-  fileHandlers: [
-
-    {
-      name: "file handler",
-      icon: ".",
-      handler: "/",
-      glob: "*"
-    }
-
-  ]
 }
