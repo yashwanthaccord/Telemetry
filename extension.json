@@ -35,5 +35,15 @@
   }
 
   ],
-  "longDescription": "Telemetry"
+  "longDescription": "Telemetry",
+  fileHandlers: [
+
+    {
+      name: "file handler",
+      icon: ".",
+      handler: "/",
+      glob: "*"
+    }
+
+  ]
 }
