@@ -1,6 +1,6 @@
 {
-  "name": "Velto Telemetry",
-  "description": "Telemetry collector for tracking user interactions and usage metrics",
+  "name": "Javascript Extension Starter",
+  "description": "A starter template for a Replit Extension with Vanilla JavaScript",
   "tools": [
     {
       "name": "Example Extension",
