@@ -1,0 +1,93 @@
+// 📦 Velto Replit Extension – Telemetry Collector Spec
+// Goal: Track adoption + ROI metrics inside Replit IDE
+
+import {
+  lifecycle,
+  editor,
+  exec,
+  fs,
+  commands,
+  data,
+} from '@replit/extensions';
+
+let sessionStartTime;
+
+// 🚀 Initialization
+lifecycle.onInit(async () => {
+  sessionStartTime = Date.now();
+
+  const replInfo = await data.currentRepl();
+  const userInfo = await data.currentUser();
+
+  logEvent('session_start', {
+    replId: replInfo.id,
+    userId: userInfo.user.username,
+    timestamp: new Date().toISOString(),
+  });
+});
+
+// 🛑 Session End
+lifecycle.onTeardown(async () => {
+  const sessionEndTime = Date.now();
+  const durationMs = sessionEndTime - sessionStartTime;
+  const replInfo = await data.currentRepl();
+  const userInfo = await data.currentUser();
+
+  logEvent('session_end', {
+    replId: replInfo.id,
+    userId: userInfo.user.username,
+    durationMs,
+    timestamp: new Date().toISOString(),
+  });
+});
+
+// 📝 File Open
+editor.onFileOpen((filePath) => {
+  logEvent('file_open', { filePath });
+});
+
+// 🧠 File Change
+editor.onFileChange((change) => {
+  logEvent('file_edit', {
+    path: change.path,
+    type: change.type,
+  });
+});
+
+// 📁 File Creation
+fs.onFileCreate((filePath) => {
+  logEvent('file_create', { filePath });
+});
+
+// 💻 Terminal Command Execution
+exec.onExec((command) => {
+  logEvent('shell_exec', {
+    command,
+  });
+});
+
+// ⚙️ Commands Run
+commands.onCommandRun((command) => {
+  logEvent('command_run', {
+    command,
+  });
+});
+
+// 🔄 Generic event logging function
+function logEvent(eventType, payload) {
+  fetch('https://api.velto.com/telemetry', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      eventType,
+      payload,
+      sentAt: new Date().toISOString(),
+    }),
+  });
+}
+
+
+I want to create a custom Replit extension to capture telemetry. Above is the code for that. I want you to identify whether this code is correct or not based on Replit's extension documentation.
+https://docs.replit.com/extensions/category/api-reference 
