@@ -16,7 +16,7 @@ async function main() {
 
   // Session events for file changes
   const session = await replit.session;
-  
+
   session.onDidStartSession((e) => {
     logEvent('session_file_start', {
       filePath: e.filePath,
@@ -89,3 +89,4 @@ window.addEventListener('unload', async () => {
 //It is not working will it work now lets test now
 
 main();
+// Lets edit this file and see if it works
