@@ -1,4 +1,3 @@
-
 let sessionStartTime;
 
 async function main() {
@@ -14,27 +13,14 @@ async function main() {
     timestamp: new Date().toISOString()
   });
 
-  // Session events for file changes
+  // Track active file changes
   const session = await replit.session;
 
-  session.onDidStartSession((e) => {
-    logEvent('session_file_start', {
-      filePath: e.filePath,
-      languageId: e.languageId
-    });
-  });
-
-  session.onDidChangeSession((e) => {
-    logEvent('session_file_change', {
-      filePath: e.filePath,
-      selections: e.selections,
-      visibleRanges: e.visibleRanges
-    });
-  });
-
-  session.onDidEndSession((e) => {
-    logEvent('session_file_end', {
-      filePath: e.filePath
+  session.onActiveFileChange((event) => {
+    logEvent('active_file_change', {
+      filePath: event.filePath,
+      languageId: event.languageId,
+      timestamp: new Date().toISOString()
     });
   });
 
