@@ -1,34 +1,42 @@
+
 {
+  // Name of the extension shown in the Extensions panel
   "name": "Velto Telemetry",
+  
+  // Short description shown in the Extensions panel
   "description": "Telemetry collector for tracking user interactions and usage metrics",
+  
+  // Additional tools to be added to the sidebar (empty for now)
   "tools": [],
+  
+  // Background page configuration - runs extension logic
   "background": {
     "page": "background.html"
   },
+  
+  // Extension icon shown in the Extensions panel
   "icon": "/replit.svg",
+  
+  // Required permissions and their justifications
   "scopes": [
-
     {
       "name": "read",
       "reason": "Read any file in your App"
     },
-
     {
-      "name": "repldb:read",
+      "name": "repldb:read", 
       "reason": "Read any key, or list all keys under any prefix in the repldb belonging to your App"
     },
-
     {
       "name": "repldb:write",
       "reason": "Write or delete any key in the repldb belonging to your App"
     },
-
     {
       "name": "experimental-api",
       "reason": "Use experimental APIs that may be unstable, change in behavior, or be removed entirely"
     }
-
   ],
-  "longDescription": "Telemetry",
-}
 
+  // Detailed description of the extension's purpose
+  "longDescription": "Telemetry"
+}
