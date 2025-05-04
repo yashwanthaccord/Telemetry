@@ -1,43 +1,53 @@
 let sessionStartTime;
 
 async function main() {
-  await replit.init();
-  sessionStartTime = Date.now();
+  try {
+    await replit.init();
+    sessionStartTime = Date.now();
 
-  const replInfo = await replit.data.currentRepl();
-  const userInfo = await replit.data.currentUser();
+    const replInfo = await replit.data.currentRepl();
+    const userInfo = await replit.data.currentUser();
 
-  logEvent('session_start', {
-    replId: replInfo.id,
-    userId: userInfo.username,
-    timestamp: new Date().toISOString()
-  });
+    console.log("Initialized:", { replId: replInfo.id, user: userInfo.username });
 
-  // Track active file changes
-  const session = await replit.session;
-
-  session.onActiveFileChange((event) => {
-    logEvent('active_file_change', {
-      filePath: event.filePath,
-      languageId: event.languageId,
+    await logEvent('session_start', {
+      replId: replInfo.id,
+      userId: userInfo.username,
       timestamp: new Date().toISOString()
     });
-  });
 
-  // Editor events  
-  const editor = await replit.editor;
+    // Track active file changes
+    const session = replit.session;
 
-  editor.onDidChangeCursorPosition(() => {
-    logEvent('cursor_move', {
-      timestamp: new Date().toISOString()
+    session.onActiveFileChange((event) => {
+      console.log("File changed:", event);
+      logEvent('active_file_change', {
+        filePath: event.filePath,
+        languageId: event.languageId,
+        timestamp: new Date().toISOString()
+      });
     });
-  });
 
-  editor.onDidChangeTextDocument(() => {
-    logEvent('text_change', {
-      timestamp: new Date().toISOString()
+    // Editor events  
+    const editor = replit.editor;
+
+    editor.onDidChangeCursorPosition(() => {
+      console.log("Cursor moved");
+      logEvent('cursor_move', {
+        timestamp: new Date().toISOString()
+      });
     });
-  });
+
+    editor.onDidChangeTextDocument(() => {
+      console.log("Text changed");
+      logEvent('text_change', {
+        timestamp: new Date().toISOString()
+      });
+    });
+
+  } catch (err) {
+    console.error("Error in main initialization:", err);
+  }
 }
 
 async function logEvent(eventType, payload) {
@@ -58,10 +68,6 @@ async function logEvent(eventType, payload) {
   }
 }
 
-// Initialize the extension
-// adding comments for testing
-
-// Cleanup on unload
 window.addEventListener('unload', async () => {
   const sessionEndTime = Date.now();
   const durationMs = sessionEndTime - sessionStartTime;
@@ -72,7 +78,5 @@ window.addEventListener('unload', async () => {
   });
 });
 
-//It is not working will it work now lets test now
-
 main();
-// Lets edit this file and see if it works
+// Hoping this to work now
