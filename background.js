@@ -14,13 +14,28 @@ async function main() {
     timestamp: new Date().toISOString()
   });
 
-  // File system events
-  replit.fs.onFileCreate((path) => {
-    logEvent('file_create', { path });
+  // Session events for file changes
+  const session = await replit.session;
+  
+  session.onDidStartSession((e) => {
+    logEvent('session_file_start', {
+      filePath: e.filePath,
+      languageId: e.languageId
+    });
   });
 
-  replit.fs.onFileChange((path) => {
-    logEvent('file_change', { path });
+  session.onDidChangeSession((e) => {
+    logEvent('session_file_change', {
+      filePath: e.filePath,
+      selections: e.selections,
+      visibleRanges: e.visibleRanges
+    });
+  });
+
+  session.onDidEndSession((e) => {
+    logEvent('session_file_end', {
+      filePath: e.filePath
+    });
   });
 
   // Editor events  
