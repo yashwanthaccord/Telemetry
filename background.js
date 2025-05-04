@@ -25,7 +25,7 @@ async function main() {
 
   // Editor events  
   const editor = await replit.editor;
-  
+
   editor.onDidChangeCursorPosition(() => {
     logEvent('cursor_move', {
       timestamp: new Date().toISOString()
