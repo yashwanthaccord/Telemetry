@@ -12,15 +12,16 @@ async function main() {
     const replInfo = await replit.data.currentRepl();
     const userInfo = await replit.data.currentUser();
 
-    console.log("Initialized:", { replId: replInfo.id, user: userInfo.username });
+    console.log("Initialized:", { replId: replInfo, user: userInfo });
 
     // Log session start event
     await logEvent('session_start', {
-      replId: replInfo.id,
-      userId: userInfo.username,
+      replId: replInfo.repl.id,
+      userId: userInfo.user.username,
       timestamp: new Date().toISOString()
     });
-
+    // edit event
+    //
     // Track file changes using session API
     const session = replit.session;
 
@@ -30,6 +31,8 @@ async function main() {
       logEvent('active_file_change', {
         filePath: event.filePath,
         languageId: event.languageId,
+        replId: replInfo.repl.id,
+        userId: userInfo.user.username,
         timestamp: new Date().toISOString()
       });
     });
