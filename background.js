@@ -7,7 +7,7 @@ async function main() {
     // Initialize Replit extension API
     await replit.init();
     sessionStartTime = Date.now();
-
+    // editing file
     // Get current repl and user information
     const replInfo = await replit.data.currentRepl();
     const userInfo = await replit.data.currentUser();
@@ -16,21 +16,22 @@ async function main() {
 
     // Log session start event
     await logEvent('session_start', {
-      replId: replInfo.repl.id,
-      userId: userInfo.user.username,
+      replId: replInfo.repl,
+      userId: userInfo.user,
+      userInfo: userInfo,
+      replInfo: replInfo,
       timestamp: new Date().toISOString()
     });
     // edit event
     //
     // Track file changes using session API
     const session = replit.session;
-
+    // Lets test now
     // Listen for active file changes and log them
     session.onActiveFileChange((event) => {
       console.log("File changed:", event);
       logEvent('active_file_change', {
-        filePath: event.filePath,
-        languageId: event.languageId,
+        event: event,
         replId: replInfo.repl.id,
         userId: userInfo.user.username,
         timestamp: new Date().toISOString()
