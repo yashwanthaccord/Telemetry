@@ -1,41 +1,42 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Replit Session Tracker</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <script src="https://unpkg.com/@replit/extensions@1.8.0/dist/index.global.js"></script>
-  </head>
 
-  <body>
-    <div id="container">
-      <h1>Replit Session Tracker</h1>
-      <div id="loading">Loading session data...</div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Replit Session Tracker</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://unpkg.com/@replit/extensions@1.8.0/dist/index.global.js"></script>
+</head>
 
-      <div id="session-info" style="display: none">
-        <div class="metric-card">
-          <h3>Session Duration</h3>
-          <p id="duration">0:00:00</p>
-        </div>
+<body>
+  <div id="container">
+    <h1>Velto Replit Session Tracker</h1>
+    <div id="loading">Welcome to Velto Replit session Tracker</div>
 
-        <div class="metric-card">
-          <h3>File Changes</h3>
-          <p id="file-changes">0</p>
-        </div>
+    <div id="session-info" style="display: none">
+      <div class="metric-card">
+        <h3>Session Duration</h3>
+        <p id="duration">0:00:00</p>
+      </div>
 
-        <div class="metric-card">
-          <h3>Cursor Movements</h3>
-          <p id="cursor-moves">0</p>
-        </div>
+      <div class="metric-card">
+        <h3>File Changes</h3>
+        <p id="file-changes">0</p>
+      </div>
 
-        <div class="metric-grid">
-          <h3>Recent Activities</h3>
-          <ul id="activity-list"></ul>
-        </div>
+      <div class="metric-card">
+        <h3>Cursor Movements</h3>
+        <p id="cursor-moves">0</p>
+      </div>
+
+      <div class="metric-grid">
+        <h3>Recent Activities</h3>
+        <ul id="activity-list"></ul>
       </div>
     </div>
-    <script src="script.js"></script>
-  </body>
+  </div>
+  <script src="script.js"></script>
+</body>
+
 </html>
