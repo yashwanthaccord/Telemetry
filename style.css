@@ -1,25 +1,73 @@
-body,
-html {
+
+body, html {
   background-color: #1c2333;
   color: white;
   font-family: sans-serif;
   margin: 0;
   padding: 0;
-  text-align: center;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 #container {
-  padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.btn {
+h1 {
+  text-align: center;
+  color: #0097FB;
+  margin-bottom: 30px;
+}
+
+.metric-card {
+  background: #2b3245;
   border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.metric-card h3 {
+  margin: 0;
+  color: #808080;
+  font-size: 14px;
+}
+
+.metric-card p {
+  margin: 10px 0 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #0097FB;
+}
+
+.metric-grid {
+  background: #2b3245;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.metric-grid h3 {
+  margin: 0 0 15px;
+  color: #808080;
+}
+
+#activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#activity-list li {
   padding: 8px;
-  background: transparent;
-  color: white;
-  border-color: white;
+  border-bottom: 1px solid #3d4558;
+  font-size: 14px;
+}
+
+#loading {
+  text-align: center;
+  font-style: italic;
+  color: #808080;
 }

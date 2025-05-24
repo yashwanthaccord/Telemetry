@@ -1,43 +1,49 @@
+
+let fileChanges = 0;
+let cursorMoves = 0;
+let sessionStart = Date.now();
+
+function updateDuration() {
+  const duration = Math.floor((Date.now() - sessionStart) / 1000);
+  const hours = Math.floor(duration / 3600);
+  const minutes = Math.floor((duration % 3600) / 60);
+  const seconds = duration % 60;
+  document.getElementById("duration").textContent = 
+    `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+function addActivity(text) {
+  const list = document.getElementById("activity-list");
+  const item = document.createElement("li");
+  item.textContent = `${new Date().toLocaleTimeString()} - ${text}`;
+  list.insertBefore(item, list.firstChild);
+  if (list.children.length > 50) {
+    list.removeChild(list.lastChild);
+  }
+}
+
 async function main() {
   await replit.init();
 
-  // Once initialized, show the #buttons container and hide the loading screen
-  document.getElementById("buttons").style.display = "block";
   document.getElementById("loading").style.display = "none";
+  document.getElementById("session-info").style.display = "block";
 
-  // Event Listeners
+  setInterval(updateDuration, 1000);
 
-  // Create a directory/folder named 'test' at root level when #create_test_dir is clicked
-  document
-    .getElementById("create_test_dir")
-    .addEventListener("click", async () => {
-      await replit.fs.createDir("test");
+  replit.editor.onDidChangeTextDocument(() => {
+    fileChanges++;
+    document.getElementById("file-changes").textContent = fileChanges;
+    addActivity("File content changed");
+  });
 
-      // Show a confirmation
-      await replit.messages.showConfirm("Folder Created");
-    });
+  replit.editor.onDidChangeCursorPosition(() => {
+    cursorMoves++;
+    document.getElementById("cursor-moves").textContent = cursorMoves;
+    addActivity("Cursor moved");
+  });
 
-  // Create afile named 'test-file.txt' at root level containing 'example content' when #touch_test_file is clicked
-  document
-    .getElementById("touch_text_file")
-    .addEventListener("click", async () => {
-      await replit.fs.writeFile("test-file.txt", "example content");
-
-      // Show a confirmation
-      await replit.messages.showConfirm("File Created");
-    });
-
-  // Read all the files & folders in the Repl's file system at root level when #ls_a is clicked
-  document.getElementById("ls_a").addEventListener("click", async () => {
-    const { children } = await replit.fs.readDir(".");
-
-    // Show the files and folders in #file_folder_list
-    document.getElementById("file_folder_list").innerHTML = "";
-    for (const child of children) {
-      const li = document.createElement("li");
-      li.innerText = child.filename;
-      document.getElementById("file_folder_list").appendChild(li);
-    }
+  replit.session.onActiveFileChange((event) => {
+    addActivity(`Switched to file: ${event.file}`);
   });
 }
 

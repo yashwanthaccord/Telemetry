@@ -1,28 +1,41 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>replit</title>
+    <title>Replit Session Tracker</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
-    <!-- Loads the Extensions API -->
     <script src="https://unpkg.com/@replit/extensions@1.8.0/dist/index.global.js"></script>
   </head>
 
   <body>
     <div id="container">
-      <h1>HTML/CSS/JS Extension Starter</h1>
-      <div id="loading">Loading...</div>
+      <h1>Replit Session Tracker</h1>
+      <div id="loading">Loading session data...</div>
 
-      <div id="buttons" style="display: none">
-        <button id="create_test_dir" class="btn">mkdir test</button>
-        <button id="touch_text_file" class="btn">touch ./test-file.txt</button>
-        <button id="ls_a" class="btn">ls -a</button>
+      <div id="session-info" style="display: none">
+        <div class="metric-card">
+          <h3>Session Duration</h3>
+          <p id="duration">0:00:00</p>
+        </div>
+
+        <div class="metric-card">
+          <h3>File Changes</h3>
+          <p id="file-changes">0</p>
+        </div>
+
+        <div class="metric-card">
+          <h3>Cursor Movements</h3>
+          <p id="cursor-moves">0</p>
+        </div>
+
+        <div class="metric-grid">
+          <h3>Recent Activities</h3>
+          <ul id="activity-list"></ul>
+        </div>
       </div>
-
-      <ul id="file_folder_list"></ul>
     </div>
-
     <script src="script.js"></script>
   </body>
 </html>
