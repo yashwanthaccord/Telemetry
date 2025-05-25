@@ -65,7 +65,7 @@ async function main() {
 // Send telemetry event to external endpoint
 async function logEvent(eventType, payload) {
   try {
-    await fetch('https://smee.io/vftghyjnimm', {
+    await fetch('https://app.getvelto.com/velto/webhook/replit-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
